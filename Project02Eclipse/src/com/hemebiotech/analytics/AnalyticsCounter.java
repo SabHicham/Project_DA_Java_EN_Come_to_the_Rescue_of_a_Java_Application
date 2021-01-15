@@ -2,9 +2,8 @@ package com.hemebiotech.analytics;
 
 import com.hemebiotech.analytics.count.CountSymptom;
 import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
+import com.hemebiotech.analytics.sort.SortSymptomByName;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
@@ -29,8 +28,8 @@ public class AnalyticsCounter {
 
 
 		// 3éme étapes: on range dans l'ordre alphabétique les symptomes SORT Collections.sort
-		List<String> symptoms = new ArrayList<>(symptomsCounter.keySet());
-		Collections.sort(symptoms);
+		SortSymptomByName sorter = new SortSymptomByName();
+		List<String> symptoms = sorter.sort(symptomsCounter.keySet());
 
 		//for (int i = 0; i < symptoms.size(); i++){
 			//System.out.println(symptoms.get(i)+" = "+symptomsCounter.get(symptoms.get(i)));
@@ -44,19 +43,7 @@ public class AnalyticsCounter {
 		writer.close();
 
 
-
-
 		// tester
-
-
-
-
-
-
-
-
-
-
 
 	}
 }
