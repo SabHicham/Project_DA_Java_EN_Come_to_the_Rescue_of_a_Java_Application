@@ -3,6 +3,7 @@ package com.hemebiotech.analytics;
 import com.hemebiotech.analytics.count.CountSymptom;
 import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
 import com.hemebiotech.analytics.sort.SortSymptomByName;
+import com.hemebiotech.analytics.write.WriteSymtomDataToFile;
 
 import java.io.FileWriter;
 import java.util.*;
@@ -13,6 +14,8 @@ public class AnalyticsCounter {
 		// 1ere étape: on lit le ficher symptoms.txt READ
 		ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
 		List<String> allSymptoms = reader.GetSymptoms();
+
+
 		//System.out.println(Arrays.toString(allSymptoms.toArray()));
 
 
@@ -36,14 +39,14 @@ public class AnalyticsCounter {
 		//}
 
 		// 4éme étapes: on écrit le fichier result.out WRITE
-		FileWriter writer = new FileWriter ("result.out");
-		for (String symptom : symptoms) {
-			writer.write(symptom+" = "+symptomsCounter.get(symptom)+"\n");
-		}
-		writer.close();
+		WriteSymtomDataToFile writer = new WriteSymtomDataToFile("result.out");
+		writer.write(symptoms, symptomsCounter);
+
+		// getter setter ? constructeur ? portée ? interface ?
 
 
-		// tester
+
+
 
 	}
 }
