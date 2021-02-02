@@ -41,8 +41,10 @@ public class AnalyticsCounter {
 		// 4éme étapes: on écrit le fichier result.out WRITE
 		WriteSymtomDataToFile writer = new WriteSymtomDataToFile("result.out");
 		writer.write(symptoms, symptomsCounter);
+		
 
 		// getter setter ? constructeur ? portée ? interface ?
+
 
 
 
