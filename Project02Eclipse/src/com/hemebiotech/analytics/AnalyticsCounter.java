@@ -1,54 +1,38 @@
 package com.hemebiotech.analytics;
 
-import com.hemebiotech.analytics.count.CountSymptom;
-import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
-import com.hemebiotech.analytics.sort.SortSymptomByName;
-import com.hemebiotech.analytics.write.WriteSymtomDataToFile;
-
-import java.io.FileWriter;
+import com.hemebiotech.analytics.count.ICountSymptom;
+import com.hemebiotech.analytics.read.ISymptomReader;
+import com.hemebiotech.analytics.sort.ISortSymptomByName;
+import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
 import java.util.*;
 
 public class AnalyticsCounter {
-	
-	public static void main(String args[]) throws Exception {
-		// 1ere étape: on lit le ficher symptoms.txt READ
-		ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
-		List<String> allSymptoms = reader.GetSymptoms();
+    private final ISymptomReader reader;
+    private final ICountSymptom counter;
+    private final ISortSymptomByName sorter;
+    private final IWriteSymptomDataToFile writer;
+
+    public AnalyticsCounter(ISymptomReader reader, ICountSymptom counter, ISortSymptomByName sorter, IWriteSymptomDataToFile writer) {
+        this.reader = reader;
+        this.counter = counter;
+        this.sorter = sorter;
+        this.writer = writer;
+    }
+
+    public void execute() throws Exception {
+        // 1ere étape: on lit le ficher symptoms.txt READ
+        List<String> allSymptoms = reader.GetSymptoms();
 
 
-		//System.out.println(Arrays.toString(allSymptoms.toArray()));
+        // 2eme etapes: on parcours le fichier en comptant les symptoms COUNT (Map)
+        Map<String, Integer> symptomsCounter = counter.count(allSymptoms);
 
 
-		// 2eme etapes: on parcours le fichier en comptant les symptoms COUNT (Map)
-		CountSymptom counter = new CountSymptom();
-		Map<String, Integer> symptomsCounter = counter.count(allSymptoms);
+        // 3éme étapes: on range dans l'ordre alphabétique les symptomes SORT Collections.sort
+        List<String> symptoms = sorter.sort(symptomsCounter.keySet());
 
 
-		// Afficher la map
-		//for (Map.Entry entry : symptomsCounter.entrySet()) {
-			//System.out.println("key: "+entry.getKey()+"; value: "+entry.getValue());
-		//}
-
-
-		// 3éme étapes: on range dans l'ordre alphabétique les symptomes SORT Collections.sort
-		SortSymptomByName sorter = new SortSymptomByName();
-		List<String> symptoms = sorter.sort(symptomsCounter.keySet());
-
-		//for (int i = 0; i < symptoms.size(); i++){
-			//System.out.println(symptoms.get(i)+" = "+symptomsCounter.get(symptoms.get(i)));
-		//}
-
-		// 4éme étapes: on écrit le fichier result.out WRITE
-		WriteSymtomDataToFile writer = new WriteSymtomDataToFile("result.out");
-		writer.write(symptoms, symptomsCounter);
-		
-
-		// getter setter ? constructeur ? portée ? interface ?
-
-
-
-
-
-
-	}
+        // 4éme étapes: on écrit le fichier result.out WRITE
+        writer.write(symptoms, symptomsCounter);
+    }
 }
