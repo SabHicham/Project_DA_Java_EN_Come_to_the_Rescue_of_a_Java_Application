@@ -21,7 +21,7 @@ public class AnalyticsCounter {
 
     public void execute() throws Exception {
         // 1ere étape: on lit le ficher symptoms.txt READ
-        List<String> allSymptoms = reader.GetSymptoms();
+        List<String> allSymptoms = reader.getSymptoms();
 
 
         // 2eme etapes: on parcours le fichier en comptant les symptoms COUNT (Map)
