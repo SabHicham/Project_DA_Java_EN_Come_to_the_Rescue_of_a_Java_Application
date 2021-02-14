@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CountSymptom implements ICountSymptom {
+    /**
+     * on compte les symptoms et on les stocks dans une map
+     * @param symptoms
+     * @return
+     */
     @Override
     public Map<String, Integer> count(List<String> symptoms){
         Map<String, Integer> symptomsCounter = new HashMap<>();

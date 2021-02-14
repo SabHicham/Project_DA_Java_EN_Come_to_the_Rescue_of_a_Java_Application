@@ -6,6 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SortSymptomByName implements ISortSymptomByName {
+    /**
+     * On range les symptoms dans l'ordre alphabétique
+     * @param symptoms
+     * @return
+     */
 
     @Override
     public List<String> sort(Collection<String> symptoms) {

@@ -8,6 +8,11 @@ import java.util.Map;
 public class WriteSymtomDataToFile implements IWriteSymptomDataToFile{
     private String filename;
 
+    /**
+     * on écrit les symptoms dans le fichier result.out
+     * @param filename
+     */
+
     public WriteSymtomDataToFile(String filename) {
         this.filename = filename;
     }

@@ -19,6 +19,10 @@ public class AnalyticsCounter {
         this.writer = writer;
     }
 
+    /**
+     * On initialise le comptage plus le trie des symptoms
+     * @throws Exception
+     */
     public void execute() throws Exception {
         // 1ere étape: on lit le ficher symptoms.txt READ
         List<String> allSymptoms = reader.getSymptoms();
